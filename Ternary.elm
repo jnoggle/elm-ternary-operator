@@ -1,16 +1,31 @@
 module Ternary exposing ((?), (!))
 
+import Html exposing (Html, text)
 
+
+ternary : Bool -> a -> a -> a
+ternary condition consequent alternative =
+    if condition then
+        consequent
+    else
+        alternative
+
+
+infixr 1 !
 (!) : a -> a -> ( a, a )
 (!) =
     (,)
-infix 2 !
 
 
+infixr 1 ?
 (?) : Bool -> ( a, a ) -> a
-(?) cond ( expression, alternative ) =
-    if cond then
-        expression
+(?) condition ( consequent, alternative ) =
+    if condition then
+        consequent
     else
         alternative
-infix 1 ?
+
+
+main : Html a
+main =
+    text <| True ? "The Ternary operator is the best!" ! "Why spread lines out clearly when you can smush them into one?"
